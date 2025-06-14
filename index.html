@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting to Form...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      color: #333;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 400px;
+    }
+
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #3498db;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .message {
+      font-size: 1.2rem;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    async function redirectToForm() {
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzHuhDgBovYmOuEPXF0tR85gdoPhLK3cJT3_YLQXlqemYrXvCajy6HtUtsGsSpeugyD/exec');
+        const url = await response.text();
+        window.location.href = url;
+      } catch (error) {
+        document.querySelector('.message').innerHTML = "<span class='error'>⚠️ Failed to redirect. Please try again later.</span>";
+        console.error("Redirect error:", error);
+      }
+    }
+
+    window.onload = redirectToForm;
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="spinner"></div>
+    <div class="message">Redirecting you to today’s form…</div>
+  </div>
+</body>
+</html>
